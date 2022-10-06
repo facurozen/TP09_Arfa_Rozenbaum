@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "TP09_Arfa_Rozenbaum/1.0.0": {
+        "runtime": {
+          "TP09_Arfa_Rozenbaum.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TP09_Arfa_Rozenbaum/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
