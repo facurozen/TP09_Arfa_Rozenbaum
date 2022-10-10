@@ -2,20 +2,20 @@ using System;
 
 namespace TP09_Arfa_Rozenbaum.Models
 { 
-    public class Usuarios
+    public class Usuario
     {
         private int _IdUsuario; 
         private string _Nombre;
         private string _Email;
         private string _Contraseña;
-        public Usuarios(int IdUsuario, string Nombre, string Email, string Contraseña)
+        public Usuario(int IdUsuario, string Nombre, string Email, string Contraseña)
         {
             _IdUsuario = IdUsuario;
             _Nombre = Nombre;
             _Email = Email;
             _Contraseña = Contraseña;
         }
-        public Usuarios(){}
+        public Usuario(){}
 
          public int IdUsuario
         {
