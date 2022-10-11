@@ -8,53 +8,53 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
 
-    private static string conexion = @"Server=NombreMaquina;DataBase=Mr.Peliculas.sql;TrustedConnection=True;";
+    private static string _connectionString = @"Server=DESKTOP-5JS9G07\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
-    public static List<Pelicula> LevantarPeliculas()
+    public static List<Peliculas> LevantarPeliculas()
     {
         string sql = "SELECT * FROM Peliculas";
-        List<Pelicula> l = new List<Pelicula>();
+        List<Peliculas> l = new List<Peliculas>();
         using (SqlConnection db = new SqlConnection())
         {
-            l = db.Query<Pelicula>(sql).ToList();
+            l = db.Query<Peliculas>(sql).ToList();
         }
         return l;
     }
 
-    public static List<Pelicula> LevantarPeliculasPorGenero(int IdGenero)
+    public static List<Peliculas> LevantarPeliculasPorGenero(int IdGenero)
     {
         string sql = "SELECT p.* FROM Peliculas AS p INNER JOIN GeneroPorPelicula AS gp ON p.IdPelicula=gp.IdPelicula WHERE gp.IdGenero=@pIdGenero";
-        List<Pelicula> l = new List<Pelicula>();
+        List<Peliculas> l = new List<Peliculas>();
         using (SqlConnection db = new SqlConnection())
         {
-            l = db.Query<Pelicula>(sql, new { pIdGenero = IdGenero }).ToList();
+            l = db.Query<Peliculas>(sql, new { pIdGenero = IdGenero }).ToList();
         }
         return l;
     }
 
-    public static Pelicula LevantarPelicula(int IdPelicula)
+    public static Peliculas LevantarPelicula(int IdPelicula)
     {
         string sql = "SELECT * FROM Peliculas WHERE IdPelicula=@pIdPelicula";
-        Pelicula p = new Pelicula();
+        Peliculas p = new Peliculas();
         using (SqlConnection db = new SqlConnection())
         {
-            p = db.QueryFirstOrDefault<Pelicula>(sql, new { pIdPelicula = IdPelicula });
+            p = db.QueryFirstOrDefault<Peliculas>(sql, new { pIdPelicula = IdPelicula });
         }
         return p;
     }
 
-    public static List<Comentario> LevantarComentariosPorPelicula(int IdPelicula)
+    public static List<Comentarios> LevantarComentariosPorPelicula(int IdPelicula)
     {
         string sql = "SELECT * FROM Comentarios WHERE IdPelicula=@pIdPelicula";
-        List<Comentario> l = new List<Comentario>();
+        List<Comentarios> l = new List<Comentarios>();
         using (SqlConnection db = new SqlConnection())
         {
-            l = db.Query<Comentario>(sql, new { pIdPelicula = IdPelicula }).ToList();
+            l = db.Query<Comentarios>(sql, new { pIdPelicula = IdPelicula }).ToList();
         }
         return l;
     }
 
-    public static void AgregarComentario(Comentario c)
+    public static void AgregarComentario(Comentarios c)
     {
         string sql = "INSERT INTO Comentarios VALUES (@pIdUsuario,@pIdPelicula,@pTexto)";
         using (SqlConnection db = new SqlConnection())
@@ -63,7 +63,7 @@ public class BD
         }
     }
 
-    public static void AgregarUsuario(Usuario u)
+    public static void AgregarUsuario(Usuarios u)
     {
         string sql = "INSERT INTO Usuarios VALUES (@pNombre,@pContraseña,@pEmail)";
         using (SqlConnection db = new SqlConnection())
@@ -75,25 +75,25 @@ public class BD
     public static bool VerificarInicioSesion(string Nombre, string Contraseña)
     {
         string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Contraseña=@pContraseña";
-        Usuario u = new Usuario();
+        Usuarios u = new Usuarios();
         using (SqlConnection db = new SqlConnection())
         {
-            u = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = Nombre, pContraseña = Contraseña });
+            u = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = Nombre, pContraseña = Contraseña });
         }
         return u == null;
     }
 
-    public static bool VerificarRegistro(Usuario u)
+    public static bool VerificarRegistro(Usuarios u)
     {
         string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre OR Email=@pEmail";
         using (SqlConnection db = new SqlConnection())
         {
-            u = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = u.Nombre, pEmail = u.Email });
+            u = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = u.Nombre, pEmail = u.Email });
         }
         return u == null;
     }
 
-    public static void AgregarPelicula(Pelicula p)
+    public static void AgregarPelicula(Peliculas p)
     {
         string sql = "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño)";
         using (SqlConnection db = new SqlConnection())
@@ -111,4 +111,3 @@ public class BD
         }
     }
 }
-

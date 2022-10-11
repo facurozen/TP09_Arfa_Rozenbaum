@@ -26,7 +26,7 @@ namespace TP09_Arfa_Rozenbaum.Models
             get {return _IdGenero;}
             set{_IdGenero = value;}
         }
-        public string  IdPelicula
+        public int  IdPelicula
         {
             get {return _IdPelicula;}
             set{_IdPelicula = value;}

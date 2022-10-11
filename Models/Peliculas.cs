@@ -2,7 +2,7 @@ using System;
 
 namespace TP09_Arfa_Rozenbaum.Models
 { 
-    public class Pelicula
+    public class Peliculas
     {
         private int _IdPelicula; 
         private string _Nombre;
@@ -10,7 +10,7 @@ namespace TP09_Arfa_Rozenbaum.Models
         private string _Sinopsis;
         private DateTime _Duracion;
         private int _Año; 
-        public Pelicula(int IdPelicula, string Nombre, string Portada, string Sinopsis, DateTime Duracion, int Año)
+        public Peliculas(int IdPelicula, string Nombre, string Portada, string Sinopsis, DateTime Duracion, int Año)
         {
             _IdPelicula = IdPelicula;
             _Nombre = Nombre;
@@ -19,7 +19,7 @@ namespace TP09_Arfa_Rozenbaum.Models
             _Duracion = Duracion;
             _Año = Año;
         }
-        public Pelicula(){}
+        public Peliculas(){}
 
          public int IdPelicula
         {
