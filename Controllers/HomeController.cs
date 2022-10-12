@@ -15,11 +15,47 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View("Login");
+        ViewBag.Usuario = BD.ObtenerUsuario();
+        return View();
     }
+
+    public IActionResult Registro()
+    {
+        return View();
+    }
+
     public IActionResult Login()
     {
         return View();
+    }
+
+    [HttpPost]
+    public IActionResult IniciarSesion(string Nombre, string Contraseña)
+    {
+        BD.IniciarSesion(Nombre, Contraseña);
+        if (BD.ObtenerUsuario() == null)
+        {
+            return RedirectToAction("Login");
+        }
+        else
+        {
+            return RedirectToAction("Index");
+        }
+    }
+
+    [HttpPost]
+    public IActionResult Registrar(Usuarios u)
+    {
+        if (BD.VerificarRegistro(u.Nombre, u.Email))
+        {
+            BD.AgregarUsuario(u);
+            BD.IniciarSesion(u.Nombre, u.Contraseña);
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return RedirectToAction("Registro");
+        }
     }
 
     public IActionResult Privacy()
