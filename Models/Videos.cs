@@ -2,28 +2,28 @@ using System;
 
 namespace TP09_Arfa_Rozenbaum.Models
 { 
-    public class Videos
+    public class Video
     {
         private int _IdVideo;
-        private string _Video; 
+        private string _ArchivoVideo; 
         private int _IdPelicula;
-        public Videos(int IdVideo, string Video, int IdPelicula)
+        public Video(int IdVideo, string ArchivoVideo, int IdPelicula)
         {
             _IdVideo = IdVideo;
-            _Video = Video;
+            _ArchivoVideo = ArchivoVideo;
             _IdPelicula = IdPelicula;
         }
-        public Videos(){}
+        public Video(){}
 
         public int IdVideo
         {
             get {return _IdVideo;}
             set{_IdVideo = value;}
         }
-        public string Video
+        public string ArchivoVideo
         {
-            get {return _Video;}
-            set{_Video = value;}
+            get {return _ArchivoVideo;}
+            set{_ArchivoVideo = value;}
         }
         public int IdPelicula
         {

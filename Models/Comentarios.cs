@@ -2,18 +2,18 @@ using System;
 
 namespace TP09_Arfa_Rozenbaum.Models
 { 
-    public class Comentarios
+    public class Comentario
     {
         private int _IdComentario;
         private int _IdPelicula;
         private string _Texto;
-        public Comentarios(int IdComentario, int IdPelicula, string Texto)
+        public Comentario(int IdComentario, int IdPelicula, string Texto)
         {
             _IdComentario = IdComentario;
             _IdPelicula = IdPelicula;
             _Texto = Texto;
         }
-        public Comentarios(){}
+        public Comentario(){}
 
         public int IdComentario
         {

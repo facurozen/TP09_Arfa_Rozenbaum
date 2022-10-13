@@ -2,26 +2,26 @@ using System;
 
 namespace TP09_Arfa_Rozenbaum.Models
 { 
-    public class Generos
+    public class Genero
     {
         private int _IdGenero;
-        private string _Genero;
-        public Generos(int IdGenero, string Genero)
+        private string _NombreGenero;
+        public Genero(int IdGenero, string NombreGenero)
         {
             _IdGenero = IdGenero;
-            _Genero = Genero;
+            _NombreGenero = NombreGenero;
         }
-        public Generos(){}
+        public Genero(){}
 
         public int IdGenero
         {
             get {return _IdGenero;}
             set{_IdGenero = value;}
         }
-        public string Genero
+        public string NombreGenero
         {
-            get {return _Genero;}
-            set{_Genero = value;}
+            get {return _NombreGenero;}
+            set{_NombreGenero = value;}
         }
     }
 }
