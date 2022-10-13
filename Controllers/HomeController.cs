@@ -16,6 +16,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         ViewBag.Usuario = BD.ObtenerUsuario();
+        ViewBag.ListaPeliculas=BD.LevantarPeliculas();
         return View();
     }
 

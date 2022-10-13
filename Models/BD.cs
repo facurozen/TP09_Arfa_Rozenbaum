@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuarios u = new Usuarios();
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-041;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-phz2-cidi-045;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Peliculas> LevantarPeliculas()
     {

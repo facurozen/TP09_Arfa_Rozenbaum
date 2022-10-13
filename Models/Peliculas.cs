@@ -8,9 +8,9 @@ namespace TP09_Arfa_Rozenbaum.Models
         private string _Nombre;
         private string _Portada;
         private string _Sinopsis;
-        private DateTime _Duracion;
+        private TimeSpan _Duracion;
         private int _Año; 
-        public Peliculas(int IdPelicula, string Nombre, string Portada, string Sinopsis, DateTime Duracion, int Año)
+        public Peliculas(int IdPelicula, string Nombre, string Portada, string Sinopsis, TimeSpan Duracion, int Año)
         {
             _IdPelicula = IdPelicula;
             _Nombre = Nombre;
@@ -41,7 +41,7 @@ namespace TP09_Arfa_Rozenbaum.Models
             get {return _Sinopsis;}
             set{_Sinopsis = value;}
         }
-        public DateTime Duracion
+        public TimeSpan Duracion
         {
             get {return _Duracion;}
             set{_Duracion = value;}
