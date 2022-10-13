@@ -30,9 +30,9 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult IniciarSesion(string Nombre, string Contraseña)
+    public IActionResult IniciarSesion(string Nombre, string Email, string Contraseña)
     {
-        BD.IniciarSesion(Nombre, Contraseña);
+        BD.IniciarSesion(Nombre, Email, Contraseña);
         if (BD.ObtenerUsuario() == null)
         {
             return RedirectToAction("Login");
@@ -43,20 +43,6 @@ public class HomeController : Controller
         }
     }
 
-    [HttpPost]
-    public IActionResult Registrar(Usuarios u)
-    {
-        if (BD.VerificarRegistro(u.Nombre, u.Email))
-        {
-            BD.AgregarUsuario(u);
-            BD.IniciarSesion(u.Nombre, u.Contraseña);
-            return RedirectToAction("Index");
-        }
-        else
-        {
-            return RedirectToAction("Registro");
-        }
-    }
 
     public IActionResult Privacy()
     {

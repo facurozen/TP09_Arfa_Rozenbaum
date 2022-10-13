@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuarios u = new Usuarios();
-    private static string _connectionString = @"Server=DESKTOP-5JS9G07\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-041;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Peliculas> LevantarPeliculas()
     {
@@ -59,7 +59,7 @@ public class BD
         string sql = "INSERT INTO Comentarios VALUES (@pIdUsuario,@pIdPelicula,@pTexto)";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql, new { pIdUsuario = c.IdUsuario, pIdPelicula = c.IdPelicula, pTexto = c.Texto });
+            db.Execute(sql, new {pIdPelicula = c.IdPelicula, pTexto = c.Texto });
         }
     }
 
@@ -72,24 +72,13 @@ public class BD
         }
     }
 
-    public static void IniciarSesion(string Nombre, string Contraseña)
+    public static void IniciarSesion(string Nombre, string Email, string Contraseña)
     {
-        string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Contraseña=@pContraseña";
+        string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Email = @pEmail AND Contraseña=@pContraseña";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            u = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = Nombre, pContraseña = Contraseña });
+            u = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = Nombre, pEmail = Email, pContraseña = Contraseña });
         }
-    }
-
-    public static bool VerificarRegistro(string Nombre, string Email)
-    {
-        string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre OR Email=@pEmail";
-        Usuarios us = new Usuarios();
-        using (SqlConnection db = new SqlConnection(_connectionString))
-        {
-            us = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = Nombre, pEmail = Email });
-        }
-        return us == null;
     }
     public static Usuarios ObtenerUsuario()
     {
