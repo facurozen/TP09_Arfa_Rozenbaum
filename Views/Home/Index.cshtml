@@ -7,10 +7,10 @@
 <a href='@Url.Action("Login","Home")'>Login</a>
 
 <div class="row">
-    @foreach(Peliculas p in ViewBag.ListaPeliculas){
+    @foreach(Pelicula p in ViewBag.ListaPeliculas){
         <div>
             <img src=".\wwwroot\@p.Portada"alt="@p.Nombre">
-            <a src="">@p.Nombre</a>
+            <a href='@Url.Action("Reproductor","Home",new{IdPelicula=@p.IdPelicula})'>@p.Nombre</a>
             <p>Duracion: @p.Duracion.TotalMinutes minutos</p>
         </div>
     }

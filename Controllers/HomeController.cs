@@ -44,6 +44,11 @@ public class HomeController : Controller
         }
     }
 
+    public IActionResult Reproductor(int IdPelicula){
+        ViewBag.Pelicula=BD.LevantarPelicula(IdPelicula);
+        ViewBag.Video=BD.ObtenerVideo(IdPelicula);
+        return View();
+    }
 
     public IActionResult Privacy()
     {

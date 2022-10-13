@@ -102,4 +102,15 @@ public class BD
             db.Execute(sql, new { pNombre = v.FileName, pIdPelicula = IdPelicula });
         }
     }
+
+    public static Video ObtenerVideo(int IdPelicula)
+    {
+        string sql = "SELECT * FROM Videos WHERE IdPelicula=@pIdPelicula";
+        Video v = new Video();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            v = db.QueryFirstOrDefault<Video>(sql, new { pIdPelicula = IdPelicula });
+        }
+        return v;
+    }
 }
