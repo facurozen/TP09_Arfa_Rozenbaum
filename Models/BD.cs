@@ -77,7 +77,7 @@ public class BD
         string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Contraseña=@pContraseña";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            u = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = Nombre, pContraseña = Contraseña });
+            u = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = Nombre, pContraseña = Contraseña });
         }
     }
 
@@ -87,7 +87,7 @@ public class BD
         Usuarios us = new Usuarios();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            us = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = Nombre, pEmail = Email });
+            us = db.QueryFirstOrDefault<Usuarios>(sql, new { pNombre = Nombre, pEmail = Email });
         }
         return us == null;
     }
