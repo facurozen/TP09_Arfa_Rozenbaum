@@ -51,32 +51,49 @@ public class HomeController : Controller
     }
 
     public IActionResult AdministrarPeliculas(){
-        ViewBag.ListaPeliculas=BD.LevantarPeliculas();
-        return View();
+        if(BD.ObtenerUsuario()==null){
+            return RedirectToAction("Index");
+        }else{
+            ViewBag.ListaPeliculas=BD.LevantarPeliculas();
+            return View();
+        }
     }
 
     public IActionResult EliminarPelicula(int IdPelicula){
-        BD.EliminarPelicula(IdPelicula);
-        //Eliminar foto y video
-        return RedirectToAction("AdministrarPeliculas");
+        if(BD.ObtenerUsuario()==null){
+            return RedirectToAction("Index");
+        }else{
+            BD.EliminarPelicula(IdPelicula);
+            //Eliminar foto y video
+            return RedirectToAction("AdministrarPeliculas");
+        }
     }
 
     public IActionResult AgregarPelicula(){
-        return View();
+        if(BD.ObtenerUsuario()==null){
+            return RedirectToAction("Index");
+        }else{
+            return View();
+        }
     }
 
     [HttpPost]
     public IActionResult GuardarPelicula(IFormFile arPortada,Pelicula p){
-        if(arPortada.Length>0){
-            string dirPortadas=this.Environment.ContentRootPath+@"\wwwroot\"+arPortada.FileName;
-            using(var stream=System.IO.File.Create(dirPortadas)){
-                arPortada.CopyToAsync(stream);
+        if(BD.ObtenerUsuario()==null){
+            return RedirectToAction("Index");
+        }else{
+            
+            if(arPortada.Length>0){
+                string dirPortadas=this.Environment.ContentRootPath+@"\wwwroot\"+arPortada.FileName;
+                using(var stream=System.IO.File.Create(dirPortadas)){
+                    arPortada.CopyToAsync(stream);
+                }
             }
+            p.Portada=arPortada.FileName;
+            BD.AgregarPelicula(p);
+            //BD.AgregarVideo
+            return RedirectToAction("AdministrarPeliculas");
         }
-        p.Portada=arPortada.FileName;
-        BD.AgregarPelicula(p);
-        //BD.AgregarVideo
-        return RedirectToAction("AdministrarPeliculas");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
