@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"]="Administrador de peliculas";
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Portada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Pelicula p in ViewBag.ListaPeliculas)
+        {
+            <tr>
+                <td>@p.IdPelicula</td>
+                <td>@p.Nombre</td>
+                <td><img src="\@p.Portada"alt="@p.Nombre"></td>
+                <td><a href="#">Ver Detalles</a></td>
+                <td><a asp-controller="Home" asp-action="EliminarPelicula" asp-route-IdPelicula=@p.IdPelicula>Eliminar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Home"asp-action="AgregarPelicula">Agregar Pelicula</a>
+
+@* modal o algo para ver detalles *@

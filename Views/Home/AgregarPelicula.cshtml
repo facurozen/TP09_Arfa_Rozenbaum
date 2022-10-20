@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"]="Agregar pelicula";
+}
+
+<form asp-controller="Home" asp-action="GuardarPelicula" method="post"enctype="multipart/form-data">
+    <input type="text"name="Nombre"placeholder="Nombre"> 
+    <input type="file"name="arPortada">
+    <input type="text"name="Sinopsis"placeholder="Sinopsis">
+    <label for="iDuracion">Duracion</label>
+    <input type="time"name="Duracion"id="iDuracion">
+    <input type="number"name="Año"placeholder="Año">
+    <input type="submit"value="Agregar">
+</form>
+@* falta agregar video *@

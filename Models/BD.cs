@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuario u = new Usuario();
-    private static string _connectionString = @"Server=A-phz2-cidi-045;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=LAPTOP-KQG37CT2\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> LevantarPeliculas()
     {
@@ -90,7 +90,7 @@ public class BD
         string sql = "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño)";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pAño = p.Año });
+            db.Execute(sql, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año });
         }
     }
 
@@ -112,5 +112,14 @@ public class BD
             v = db.QueryFirstOrDefault<Video>(sql, new { pIdPelicula = IdPelicula });
         }
         return v;
+    }
+    public static void EliminarPelicula(int IdPelicula){
+        string sql1 = "DELETE FROM Videos WHERE IdPelicula=@pIdPelicula";
+        string sql2 = "DELETE FROM Peliculas WHERE IdPelicula=@pIdPelicula";
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            db.Execute(sql1, new {pIdPelicula = IdPelicula });
+            db.Execute(sql2, new {pIdPelicula = IdPelicula });
+        }
     }
 }
