@@ -76,7 +76,7 @@ public class HomeController : Controller
             return View();
         }
     }
-
+//
     [HttpPost]
     public IActionResult GuardarPelicula(IFormFile arPortada,Pelicula p){
         if(BD.ObtenerUsuario()==null){
