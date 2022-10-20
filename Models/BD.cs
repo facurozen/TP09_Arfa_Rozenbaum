@@ -10,7 +10,7 @@ public class BD
     private static Usuario u = null;
     private static string _connectionString = @"Server=A-PHZ2-CIDI-045;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
-    public static List<Pelicula> LevantarPeliculas()
+    public static List<Pelicula> ObtenerPeliculas()
     {
         string sql = "SELECT * FROM Peliculas";
         List<Pelicula> l = new List<Pelicula>();
@@ -21,7 +21,7 @@ public class BD
         return l;
     }
 
-    public static List<Pelicula> LevantarPeliculasPorGenero(int IdGenero)
+    public static List<Pelicula> ObtenerPeliculasPorGenero(int IdGenero)
     {
         string sql = "SELECT p.* FROM Peliculas AS p INNER JOIN GeneroPorPelicula AS gp ON p.IdPelicula=gp.IdPelicula WHERE gp.IdGenero=@pIdGenero";
         List<Pelicula> l = new List<Pelicula>();
@@ -32,7 +32,7 @@ public class BD
         return l;
     }
 
-    public static Pelicula LevantarPelicula(int IdPelicula)
+    public static Pelicula ObtenerPelicula(int IdPelicula)
     {
         string sql = "SELECT * FROM Peliculas WHERE IdPelicula=@pIdPelicula";
         Pelicula p = new Pelicula();
@@ -43,7 +43,7 @@ public class BD
         return p;
     }
 
-    public static List<Comentario> LevantarComentariosPorPelicula(int IdPelicula)
+    public static List<Comentario> ObtenerComentariosPorPelicula(int IdPelicula)
     {
         string sql = "SELECT * FROM Comentarios WHERE IdPelicula=@pIdPelicula";
         List<Comentario> l = new List<Comentario>();

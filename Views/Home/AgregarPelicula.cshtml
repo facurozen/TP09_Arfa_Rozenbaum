@@ -4,11 +4,21 @@
 
 <form asp-controller="Home" asp-action="GuardarPelicula" method="post"enctype="multipart/form-data">
     <input type="text"name="Nombre"placeholder="Nombre"> 
-    <input type="file"name="arPortada">
+    <input type="file"name="arPortada"id="iPortada">
     <input type="text"name="Sinopsis"placeholder="Sinopsis">
     <label for="iDuracion">Duracion</label>
     <input type="time"name="Duracion"id="iDuracion">
     <input type="number"name="Año"placeholder="Año">
     <input type="submit"value="Agregar">
 </form>
+<div id="i"></div>
+<script>
+    $("#iPortada").on("change", function(){
+    var file = this.files[0],
+       fileName = file.name,
+       fileSize = file.size;
+    alert("Uploading: "+fileName+"  "+fileSize+"bytes");
+    CustomFileHandlingFunction(file);
+    });
+</script>
 @* falta agregar video *@

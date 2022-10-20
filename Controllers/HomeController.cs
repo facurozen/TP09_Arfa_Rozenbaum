@@ -21,7 +21,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         ViewBag.Usuario = BD.ObtenerUsuario();
-        ViewBag.ListaPeliculas=BD.LevantarPeliculas();
+        ViewBag.ListaPeliculas=BD.ObtenerPeliculas();
         return View();
     }
 
@@ -45,7 +45,7 @@ public class HomeController : Controller
     }
 
     public IActionResult Reproductor(int IdPelicula){
-        ViewBag.Pelicula=BD.LevantarPelicula(IdPelicula);
+        ViewBag.Pelicula=BD.ObtenerPelicula(IdPelicula);
         ViewBag.Video=BD.ObtenerVideo(IdPelicula);
         return View();
     }
@@ -54,7 +54,7 @@ public class HomeController : Controller
         if(BD.ObtenerUsuario()==null){
             return RedirectToAction("Index");
         }else{
-            ViewBag.ListaPeliculas=BD.LevantarPeliculas();
+            ViewBag.ListaPeliculas=BD.ObtenerPeliculas();
             return View();
         }
     }
@@ -63,8 +63,10 @@ public class HomeController : Controller
         if(BD.ObtenerUsuario()==null){
             return RedirectToAction("Index");
         }else{
+            Pelicula p=BD.ObtenerPelicula(IdPelicula);
             BD.EliminarPelicula(IdPelicula);
-            //Eliminar foto y video
+            System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+p.Portada);
+            //Eliminar video
             return RedirectToAction("AdministrarPeliculas");
         }
     }
@@ -76,7 +78,7 @@ public class HomeController : Controller
             return View();
         }
     }
-//
+
     [HttpPost]
     public IActionResult GuardarPelicula(IFormFile arPortada,Pelicula p){
         if(BD.ObtenerUsuario()==null){
@@ -91,7 +93,7 @@ public class HomeController : Controller
             }
             p.Portada=arPortada.FileName;
             BD.AgregarPelicula(p);
-            //BD.AgregarVideo
+            //AgregarVideo
             return RedirectToAction("AdministrarPeliculas");
         }
     }
