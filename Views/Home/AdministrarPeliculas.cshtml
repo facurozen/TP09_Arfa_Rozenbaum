@@ -2,28 +2,38 @@
     ViewData["Title"]="Administrador de peliculas";
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Portada</th>
-        </tr>
-    </thead>
-    <tbody>
+
         @foreach(Pelicula p in ViewBag.ListaPeliculas)
         {
-            <tr>
-                <td>@p.IdPelicula</td>
-                <td>@p.Nombre</td>
-                <td><img src="\@p.Portada"alt="@p.Nombre"></td>
+           
                 <td><a href="#">Ver Detalles</a></td>
                 <td><a asp-controller="Home" asp-action="EliminarPelicula" asp-route-IdPelicula=@p.IdPelicula>Eliminar</a></td>
-            </tr>
+            
         }
-    </tbody>
-</table>
+
 
 <a asp-controller="Home"asp-action="AgregarPelicula">Agregar Pelicula</a>
 
 @* modal o algo para ver detalles *@
+
+  <div class="row">
+        @foreach (Pelicula item in ViewBag.ListaPeliculas)
+        {
+            
+            <div class="col-4">
+                <div class="card-body">
+                    <div class="card" style="width: 20rem;">
+                         <h3 class="card-text"><b style="color: black; font-family: 'Oswald', sans-serif; display: flow-root;">@item.Nombre</b></h3>
+                        <div class="card-body" style="padding:0;">
+                            <center>                               
+                               <img src="\@item.Portada" class="img2" alt="..." style="width:80%;">
+                               <h2> <a href='@Url.Action("EliminarPelicula","Home",new{IdPelicula = item.IdPelicula})'
+                               class="btn btn-primary"> Eliminar Pelcula</a> </h2>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        }
+        </div>
