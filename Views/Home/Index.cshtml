@@ -2,10 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<img class = "logoIndex" src = "/logo.png" alt= "Responsive image">
-
-<a href='@Url.Action("Login","Home")'>Login</a>
-
 <div class="row">
     @foreach(Pelicula p in ViewBag.ListaPeliculas){
         <div>
