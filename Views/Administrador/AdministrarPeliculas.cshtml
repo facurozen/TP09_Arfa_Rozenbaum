@@ -18,12 +18,12 @@
                 <td>@p.Nombre</td>
                 <td><img src="\@p.Portada"alt="@p.Nombre"></td>
                 <td><a href="#">Ver Detalles</a></td>
-                <td><a asp-controller="Home" asp-action="EliminarPelicula" asp-route-IdPelicula=@p.IdPelicula>Eliminar</a></td>
+                <td><a asp-controller="Administrador" asp-action="EliminarPelicula" asp-route-IdPelicula=@p.IdPelicula>Eliminar</a></td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-controller="Home"asp-action="AgregarPelicula">Agregar Pelicula</a>
+<a asp-controller="Administrador"asp-action="AgregarPelicula">Agregar Pelicula</a>
 
 @* modal o algo para ver detalles *@
