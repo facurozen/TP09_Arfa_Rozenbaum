@@ -12,13 +12,13 @@
     <input type="submit" value="Agregar">
 </form>
 <script>
-    var duracion=new Date(0).getSeconds();
+    var duracion=new Date(2000,0,0,0,0,0);
     var video=document.createElement('video');
     document.getElementById("iVideo").addEventListener("change", function() {
         var media = URL.createObjectURL(this.files[0]);
         video.src = media;
         video.onloadedmetadata=function(){
-            duracion=new Date(video.duration);
+            duracion=duracion=new Date(2000,0,0,0,0,video.duration).toTimeString().split(' ')[0];
             $('#iDuracion').val(duracion);
         };
         //no funca
