@@ -153,8 +153,8 @@ body {
 } */
 .containerIndex{
   width: 100%;
-  display: flex;
-  justify-content: space-between
+  /* display: flex; */
+  /* justify-content: space-between */
 }
 .cuadradoPeli{
   width: 20%;
@@ -164,4 +164,31 @@ body {
 }
 .h2EnBlanco{
   color: white;
+}
+.containerIndex .destacados{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.containerIndex .destacados .pelicula{
+  margin: 20px;
+  width: 15%;
+  height: 240px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(34, 27, 40);
+  background-blend-mode: soft-light;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.containerIndex .destacados .pelicula i{
+  margin: 10px 0px;
+  width: 20px;
+  height: 20px;
+  filter: invert();
 }

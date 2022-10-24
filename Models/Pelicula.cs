@@ -10,7 +10,9 @@ namespace TP09_Arfa_Rozenbaum.Models
         private string _Sinopsis;
         private TimeSpan _Duracion;
         private int _Año; 
-        public Pelicula(int IdPelicula, string Nombre, string Portada, string Sinopsis, TimeSpan Duracion, int Año)
+        private int _IdGenero; 
+
+        public Pelicula(int IdPelicula, string Nombre, string Portada, string Sinopsis, TimeSpan Duracion, int Año, int IdGenero)
         {
             _IdPelicula = IdPelicula;
             _Nombre = Nombre;
@@ -18,6 +20,7 @@ namespace TP09_Arfa_Rozenbaum.Models
             _Sinopsis = Sinopsis;
             _Duracion = Duracion;
             _Año = Año;
+            _IdGenero = IdGenero;
         }
         public Pelicula(){}
 
@@ -50,6 +53,11 @@ namespace TP09_Arfa_Rozenbaum.Models
         {
             get {return _Año;}
             set{_Año = value;}
+        }
+        public int IdGenero
+        {
+            get {return _IdGenero;}
+            set{_IdGenero = value;}
         }
     }
 }

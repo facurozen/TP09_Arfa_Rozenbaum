@@ -3,21 +3,47 @@
 }
 
 <div class="containerIndex">
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            @foreach (Pelicula p in ViewBag.ListaPeliculas)
-            {
-                <div class="col-md-2">
-                    <div class="card">
-                        <img src="\@p.Portada" alt="@p.Nombre" class="card-img-top">
-                    </div>
-                    <div class="card-body">
-                        <a href='@Url.Action("Reproductor","Home",new{IdPelicula=@p.IdPelicula})'>@p.Nombre</a>
-                    </div>
-                    <h5 class="card-title">@p.Nombre</h5>
-                </div>
-            }
-        </div>
+
+    <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example">
+        <option selected>Categorias</option>
+
+        @foreach (Genero item in ViewBag.ListaGeneros)
+        {
+            <option>@item.NombreGenero</option>
+        }
+        
+    </select>
+
+    <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5%">Destacadas</h4>
+
+   
+    <div class="destacados">
+
+        @foreach (Pelicula pelicula in ViewBag.ListaPeliculas)
+        {
+            <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
+                <div class="bottom">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-comment"></i>
+               </div>
+            </div>
+        }
+        
     </div>
 
+
+    <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5%@ViewBag.NombreGenero"></h4>
+
+     <div class="peliculas-por-genero">
+
+        @foreach (Pelicula pelicula in ViewBag.ListaPeliculasPorGenero)
+        {
+            <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
+               
+            </div>
+        }
+        
+    </div>
 </div>
+
+

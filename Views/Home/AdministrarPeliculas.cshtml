@@ -1,7 +1,6 @@
 @{
     ViewData["Title"]="Administrador de peliculas";
 }
-
  <h2 class = "h2EnBlanco">PELICULAS - <a href='@Url.Action("AgregarPelicula","Home")'
          class="btn btn-primary"> Agregar una pelicula nueva</a></h2>
 
@@ -9,9 +8,9 @@
         @foreach (Pelicula item in ViewBag.ListaPeliculas)
         {
             
-            <div class="col-4">
+            <div class="col-3">
                 <div class="card-body">
-                    <div class="card" style="width: 15rem;">
+                    <div class="card" style="width: 12rem;">
                          <h3 class="card-text"><b style="color: 'white'; font-family: 'Oswald', sans-serif; display: flow-root; text-align:center">@item.Nombre</b></h3>
                         <div class="card-body" style="padding:0;">
                             <center>                               

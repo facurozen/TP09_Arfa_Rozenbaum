@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuario u = null;
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-045;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=DESKTOP-5JS9G07\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> LevantarPeliculas()
     {
@@ -20,7 +20,16 @@ public class BD
         }
         return l;
     }
-
+     public static List<Genero> LevantarGeneros()
+    {
+        string sql = "SELECT * FROM Generos";
+        List<Genero> l = new List<Genero>();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            l = db.Query<Genero>(sql).ToList();
+        }
+        return l;
+    }
     public static List<Pelicula> LevantarPeliculasPorGenero(int IdGenero)
     {
         string sql = "SELECT p.* FROM Peliculas AS p INNER JOIN GeneroPorPelicula AS gp ON p.IdPelicula=gp.IdPelicula WHERE gp.IdGenero=@pIdGenero";
@@ -30,6 +39,17 @@ public class BD
             l = db.Query<Pelicula>(sql, new { pIdGenero = IdGenero }).ToList();
         }
         return l;
+    }
+
+    public static Genero LevantarNombreGenero(int IdGenero)
+    {
+        string sql = "SELECT NombreGenero FROM Generos WHERE idGenero=@pIdGenero";
+        Genero g = new Genero();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            g = db.QueryFirstOrDefault<Genero>(sql, new { pIdGenero = IdGenero });
+        }
+        return g;
     }
 
     public static Pelicula LevantarPelicula(int IdPelicula)
@@ -87,10 +107,10 @@ public class BD
 
     public static void AgregarPelicula(Pelicula p)
     {
-        string sql = "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño)";
+        string sql = "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño,@pIdGenero)";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año });
+            db.Execute(sql, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año, pIdGenero = p.IdGenero});
         }
     }
 

@@ -18,10 +18,13 @@ public class HomeController : Controller
         Environment=environment;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int idGenero)
     {
         ViewBag.Usuario = BD.ObtenerUsuario();
         ViewBag.ListaPeliculas=BD.LevantarPeliculas();
+        ViewBag.ListaGeneros = BD.LevantarGeneros();
+        ViewBag.ListaPeliculasPorGenero = BD.LevantarPeliculasPorGenero(idGenero);
+        ViewBag.NombreGenero = BD.LevantarNombreGenero(idGenero);
         return View();
     }
 
@@ -44,6 +47,12 @@ public class HomeController : Controller
         }
     }
 
+    public IActionResult CargarPeliculasPorCategoria(int idCategoria){
+        
+        return View();
+    }
+
+
     public IActionResult Reproductor(int IdPelicula){
         ViewBag.Pelicula=BD.LevantarPelicula(IdPelicula);
         ViewBag.Video=BD.ObtenerVideo(IdPelicula);
@@ -64,7 +73,6 @@ public class HomeController : Controller
             return RedirectToAction("Index");
         }else{
             BD.EliminarPelicula(IdPelicula);
-            //Eliminar foto y video
             return RedirectToAction("AdministrarPeliculas");
         }
     }
@@ -73,6 +81,7 @@ public class HomeController : Controller
         if(BD.ObtenerUsuario()==null){
             return RedirectToAction("Index");
         }else{
+            ViewBag.ListaGeneros = BD.LevantarGeneros();
             return View();
         }
     }
