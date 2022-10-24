@@ -8,16 +8,19 @@
     <input type="file" name="arVideo" id="iVideo">
     <input type="text" name="Sinopsis" placeholder="Sinopsis">
     <input type="number" name="Año" placeholder="Año">
-    <input type="time" hidden="true" id="iDuracion" name="Duracion">
+    <input type="time"  id="iDuracion" name="Duracion">
     <input type="submit" value="Agregar">
 </form>
 <script>
-    $(document).ready(function () {
-        var vid = $('#iVideo')[0];
-        var duracion = new Date(0).getMinutes();
-        vid.addEventListener('onloadedmetadata',function(){
-            duracion=vid.duration;
+    var duracion=new Date(0).getSeconds();
+    var video=document.createElement('video');
+    document.getElementById("iVideo").addEventListener("change", function() {
+        var media = URL.createObjectURL(this.files[0]);
+        video.src = media;
+        video.onloadedmetadata=function(){
+            duracion=new Date(video.duration);
             $('#iDuracion').val(duracion);
-        });
+        };
+        //no funca
     });
 </script>
