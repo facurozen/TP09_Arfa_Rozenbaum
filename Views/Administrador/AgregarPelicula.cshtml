@@ -14,7 +14,10 @@
 <script>
     $(document).ready(function () {
         var vid = $('#iVideo')[0];
-        var duracion = vid.duration;
-        $('#iDuracion').val(duracion);
+        var duracion = new Date(0).getMinutes();
+        vid.addEventListener('onloadedmetadata',function(){
+            duracion=vid.duration;
+            $('#iDuracion').val(duracion);
+        });
     });
 </script>

@@ -32,9 +32,10 @@ public class AdministradorController : Controller
             return RedirectToAction("Index","Home");
         }else{
             Pelicula p=BD.ObtenerPelicula(IdPelicula);
+            Video v=BD.ObtenerVideo(IdPelicula);
             BD.EliminarPelicula(IdPelicula);
             System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+p.Portada);
-            //Eliminar video
+            System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+v.ArchivoVideo);
             return RedirectToAction("AdministrarPeliculas");
         }
     }
@@ -48,20 +49,26 @@ public class AdministradorController : Controller
     }
 
     [HttpPost]
-    public IActionResult GuardarPelicula(IFormFile arPortada,Pelicula p){
+    public IActionResult GuardarPelicula(IFormFile arPortada,Pelicula p,IFormFile arVideo){
         if(BD.ObtenerUsuario()==null){
             return RedirectToAction("Index","Home");
-        }else{
-            
+        }else{          
             if(arPortada.Length>0){
                 string dirPortadas=this.Environment.ContentRootPath+@"\wwwroot\"+arPortada.FileName;
                 using(var stream=System.IO.File.Create(dirPortadas)){
                     arPortada.CopyToAsync(stream);
                 }
             }
+            if(arVideo.Length>0){
+                string dirVideos=this.Environment.ContentRootPath+@"\wwwroot\"+arVideo.FileName;
+                using(var stream=System.IO.File.Create(dirVideos)){
+                    arVideo.CopyToAsync(stream);
+                }
+            }
             p.Portada=arPortada.FileName;
             BD.AgregarPelicula(p);
-            //AgregarVideo
+            Video v=new Video(0,arVideo.FileName,p.Duracion,BD.ObtenerUltimaPelicula().IdPelicula);
+            BD.AgregarVideo(v);
             return RedirectToAction("AdministrarPeliculas");
         }
     }

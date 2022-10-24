@@ -5,12 +5,14 @@ namespace TP09_Arfa_Rozenbaum.Models
     public class Video
     {
         private int _IdVideo;
-        private string _ArchivoVideo; 
+        private string _ArchivoVideo;
+        private TimeSpan _Duracion;
         private int _IdPelicula;
-        public Video(int IdVideo, string ArchivoVideo, int IdPelicula)
+        public Video(int IdVideo, string ArchivoVideo, TimeSpan Duracion, int IdPelicula)
         {
             _IdVideo = IdVideo;
             _ArchivoVideo = ArchivoVideo;
+            _Duracion=Duracion;
             _IdPelicula = IdPelicula;
         }
         public Video(){}
@@ -24,6 +26,10 @@ namespace TP09_Arfa_Rozenbaum.Models
         {
             get {return _ArchivoVideo;}
             set{_ArchivoVideo = value;}
+        }
+        public TimeSpan Duracion{
+            get{return _Duracion;}
+            set{_Duracion=value;}
         }
         public int IdPelicula
         {

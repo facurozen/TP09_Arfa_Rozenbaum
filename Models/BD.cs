@@ -43,6 +43,17 @@ public class BD
         return p;
     }
 
+    public static Pelicula ObtenerUltimaPelicula()
+    {
+        string sql = "SELECT TOP 1 * FROM Peliculas ORDER BY IdPelicula DESC";
+        Pelicula p = new Pelicula();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            p = db.QueryFirstOrDefault<Pelicula>(sql);
+        }
+        return p;
+    }
+
     public static List<Comentario> ObtenerComentariosPorPelicula(int IdPelicula)
     {
         string sql = "SELECT * FROM Comentarios WHERE IdPelicula=@pIdPelicula";
@@ -94,12 +105,12 @@ public class BD
         }
     }
 
-    public static void AgregarVideo(IFormFile v, int IdPelicula)
+    public static void AgregarVideo(Video v)
     {
-        string sql = "INSERT INTO Videos VALUES (@pNombre,@pIdPelicula)";
+        string sql = "INSERT INTO Videos VALUES (@pNombre,@pDuracion,@pIdPelicula)";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql, new { pNombre = v.FileName, pIdPelicula = IdPelicula });
+            db.Execute(sql, new { pNombre=v.ArchivoVideo,pDuracion=v.Duracion,pIdPelicula=v.IdPelicula });
         }
     }
 
