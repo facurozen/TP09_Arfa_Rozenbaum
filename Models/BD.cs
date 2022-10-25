@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuario u = null;
-    private static string _connectionString = @"Server=DESKTOP-5JS9G07\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-017;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> LevantarPeliculas()
     {
@@ -92,12 +92,12 @@ public class BD
         }
     }
 
-    public static void IniciarSesion(string Nombre, string Email, string Contraseña)
+    public static void IniciarSesion(string Nombre, string Email, string pass)
     {
-        string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Email = @pEmail AND Contraseña=@pContraseña";
+        string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Email = @pEmail AND Contraseña=@pPass";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            u = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = Nombre, pEmail = Email, pContraseña = Contraseña });
+            u = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = Nombre, pEmail = Email, pPass = pass });
         }
     }
     public static Usuario ObtenerUsuario()

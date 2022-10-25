@@ -34,9 +34,9 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult IniciarSesion(string Nombre, string Email, string Contraseña)
+    public IActionResult IniciarSesion(string Nombre, string Email, string pass)
     {
-        BD.IniciarSesion(Nombre, Email, Contraseña);
+        BD.IniciarSesion(Nombre, Email, pass);
         if (BD.ObtenerUsuario() == null)
         {
             return RedirectToAction("Login");
@@ -95,7 +95,7 @@ public class HomeController : Controller
             if(arPortada.Length>0){
                 string dirPortadas=this.Environment.ContentRootPath+@"\wwwroot\"+arPortada.FileName;
                 using(var stream=System.IO.File.Create(dirPortadas)){
-                    arPortada.CopyToAsync(stream);
+                    arPortada.CopyTo(stream);
                 }
             }
             p.Portada=arPortada.FileName;

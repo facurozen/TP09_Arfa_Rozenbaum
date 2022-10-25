@@ -180,7 +180,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgb(34, 27, 40);
-  background-blend-mode: soft-light;
+  /* background-blend-mode: soft-light;  */
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
