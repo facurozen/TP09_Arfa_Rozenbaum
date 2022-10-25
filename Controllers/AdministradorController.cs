@@ -56,13 +56,13 @@ public class AdministradorController : Controller
             if(arPortada.Length>0){
                 string dirPortadas=this.Environment.ContentRootPath+@"\wwwroot\"+arPortada.FileName;
                 using(var stream=System.IO.File.Create(dirPortadas)){
-                    arPortada.CopyToAsync(stream);
+                    arPortada.CopyTo(stream);
                 }
             }
             if(arVideo.Length>0){
                 string dirVideos=this.Environment.ContentRootPath+@"\wwwroot\"+arVideo.FileName;
                 using(var stream=System.IO.File.Create(dirVideos)){
-                    arVideo.CopyToAsync(stream);
+                    arVideo.CopyTo(stream);
                 }
             }
             p.Portada=arPortada.FileName;
