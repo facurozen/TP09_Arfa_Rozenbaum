@@ -2,3 +2,8 @@
     ViewData["Title"] = @ViewBag.Pelicula.Nombre;
 }
 <video src='\@ViewBag.Video.ArchivoVideo'></video>
+<form asp-controller="Home" asp-action="AgregarComentario" id="CajaComentarios"method="POST">
+    <textarea name="Texto" form="CajaComentarios"></textarea>
+    <input type="number"name="IdPelicula"value="@ViewBag.Pelicula.IdPelicula"hidden="true">
+    <input type="submit"value="Comentar">
+</form>

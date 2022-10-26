@@ -50,6 +50,12 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpPost]
+    public IActionResult AgregarComentario(Comentario c){
+        BD.GuardarComentario(c);
+        return RedirectToAction("Reproductor",new{IdPelicula=c.IdPelicula});
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-016;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=LAPTOP-KQG37CT2\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -65,21 +65,12 @@ public class BD
         return l;
     }
 
-    public static void AgregarComentario(Comentario c)
+    public static void GuardarComentario(Comentario c)
     {
-        string sql = "INSERT INTO Comentarios VALUES (@pIdUsuario,@pIdPelicula,@pTexto)";
+        string sql = "INSERT INTO Comentarios VALUES (@pIdPelicula,@pTexto)";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             db.Execute(sql, new {pIdPelicula = c.IdPelicula, pTexto = c.Texto });
-        }
-    }
-
-    public static void AgregarUsuario(Usuario u)
-    {
-        string sql = "INSERT INTO Usuarios VALUES (@pNombre, @pEmail, @pContraseña)";
-        using (SqlConnection db = new SqlConnection(_connectionString))
-        {
-            db.Execute(sql, new { pNombre = u.Nombre, pEmail = u.Email, pContraseña = u.Contraseña });
         }
     }
 
@@ -126,11 +117,13 @@ public class BD
     }
     public static void EliminarPelicula(int IdPelicula){
         string sql1 = "DELETE FROM Videos WHERE IdPelicula=@pIdPelicula";
-        string sql2 = "DELETE FROM Peliculas WHERE IdPelicula=@pIdPelicula";
+        string sql2="DELETE FROM Comentarios WHERE IdPelicula=@pIdPelicula";
+        string sql3 = "DELETE FROM Peliculas WHERE IdPelicula=@pIdPelicula";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             db.Execute(sql1, new {pIdPelicula = IdPelicula });
             db.Execute(sql2, new {pIdPelicula = IdPelicula });
+            db.Execute(sql3, new {pIdPelicula = IdPelicula });
         }
     }
 }
