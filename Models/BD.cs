@@ -7,8 +7,9 @@ namespace TP09_Arfa_Rozenbaum.Models;
 
 public class BD
 {
-    private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
-    private static string _connectionString = @"Server=LAPTOP-KQG37CT2\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    // private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
+    private static Usuario u =null;
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-052;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -43,17 +44,6 @@ public class BD
         return p;
     }
 
-    public static Pelicula ObtenerUltimaPelicula()
-    {
-        string sql = "SELECT TOP 1 * FROM Peliculas ORDER BY IdPelicula DESC";
-        Pelicula p = new Pelicula();
-        using (SqlConnection db = new SqlConnection(_connectionString))
-        {
-            p = db.QueryFirstOrDefault<Pelicula>(sql);
-        }
-        return p;
-    }
-
     public static List<Comentario> ObtenerComentariosPorPelicula(int IdPelicula)
     {
         string sql = "SELECT * FROM Comentarios WHERE IdPelicula=@pIdPelicula";
@@ -74,26 +64,30 @@ public class BD
         }
     }
 
-    public static void IniciarSesion(string Nombre, string Email, string Contraseña)
+    public static Usuario IniciarSesion(string Nombre, string Email, string Contraseña)
     {
         string sql = "SELECT * FROM Usuarios WHERE Nombre=@pNombre AND Email = @pEmail AND Contraseña=@pContraseña";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             u = db.QueryFirstOrDefault<Usuario>(sql, new { pNombre = Nombre, pEmail = Email, pContraseña = Contraseña });
         }
+        return u;
     }
     public static Usuario ObtenerUsuario()
     {
         return u;
     }
 
-    public static void AgregarPelicula(Pelicula p)
+    public static Pelicula AgregarPelicula(Pelicula p)
     {
-        string sql = "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño)";
+        string sql1= "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño)";
+        string sql2="SELECT TOP 1 * FROM Peliculas ORDER BY IdPelicula DESC";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año });
+            db.Execute(sql1, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año });
+            p = db.QueryFirstOrDefault<Pelicula>(sql2);
         }
+        return p;
     }
 
     public static void AgregarVideo(Video v)

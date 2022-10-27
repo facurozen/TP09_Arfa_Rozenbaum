@@ -66,8 +66,8 @@ public class AdministradorController : Controller
                 }
             }
             p.Portada=arPortada.FileName;
-            BD.AgregarPelicula(p);
-            Video v=new Video(0,arVideo.FileName,p.Duracion,BD.ObtenerUltimaPelicula().IdPelicula);
+            p=BD.AgregarPelicula(p);
+            Video v=new Video(0,arVideo.FileName,p.Duracion,p.IdPelicula);
             BD.AgregarVideo(v);
             return RedirectToAction("AdministrarPeliculas");
         }

@@ -33,8 +33,8 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult IniciarSesion(string Nombre, string Email, string Contraseña)
     {
-        BD.IniciarSesion(Nombre, Email, Contraseña);
-        if (BD.ObtenerUsuario() == null)
+        Usuario p = BD.IniciarSesion(Nombre, Email, Contraseña);
+        if (p == null)
         {
             return RedirectToAction("Login");
         }
