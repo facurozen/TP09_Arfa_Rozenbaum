@@ -4,7 +4,7 @@
 
 <div class="containerIndex">
 
-    <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example">
+    <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name = "IdGenero">
         <option selected>Categorias</option>
 
         @foreach (Genero item in ViewBag.ListaGeneros)
@@ -23,7 +23,8 @@
         {
             <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
                 <div class="bottom">
-                    <i class="fa-regular fa-heart"></i>
+                    <button class="fa-regular fa-heart" onclick="darLike(@pelicula.IdPelicula)" id="CantidadLikes_@pelicula.IdPelicula">&nbsp;@pelicula.CantLikes</button>
+                    @* <i class="fa-regular fa-heart"></i> *@
                     <i class="fa-regular fa-comment"></i>
                </div>
             </div>
@@ -32,7 +33,7 @@
     </div>
 
 
-    <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5%@ViewBag.NombreGenero"></h4>
+    <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5% @ViewBag.NombreGenero"></h4>
 
      <div class="peliculas-por-genero">
 

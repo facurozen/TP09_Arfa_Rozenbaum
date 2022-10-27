@@ -3,3 +3,18 @@
 
 // Write your JavaScript code.
 
+function darLike(IdP) {
+    $.ajax(
+        {
+            type: 'POST',
+            dataType: 'JSON',
+            url: '/Home/DarLike',
+            data: { IdPelicula: IdP },
+            success:
+                function (response) {
+                    $("#CantidadLikes_"+IdP).html("&nbsp;"+response);
+                }
+        }
+    )
+
+}

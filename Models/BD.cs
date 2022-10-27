@@ -8,7 +8,7 @@ namespace TP09_Arfa_Rozenbaum.Models;
 public class BD
 {
     private static Usuario u = null;
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-017;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-048;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> LevantarPeliculas()
     {
@@ -133,6 +133,16 @@ public class BD
         }
         return v;
     }
+    public static int ObtenerLikes(int IdPelicula)
+    {
+        string sql = "SELECT CantLikes FROM Peliculas WHERE IdPelicula=@pIdPelicula";
+        Pelicula p = new Pelicula();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            p = db.QueryFirstOrDefault<Pelicula>(sql, new { pIdPelicula = IdPelicula });
+        }
+        return p.CantLikes;
+    }
     public static void EliminarPelicula(int IdPelicula){
         string sql1 = "DELETE FROM Videos WHERE IdPelicula=@pIdPelicula";
         string sql2 = "DELETE FROM Peliculas WHERE IdPelicula=@pIdPelicula";
@@ -140,6 +150,14 @@ public class BD
         {
             db.Execute(sql1, new {pIdPelicula = IdPelicula });
             db.Execute(sql2, new {pIdPelicula = IdPelicula });
+        }
+    }
+    public static void DarLike(int IdPelicula)
+    {
+        string sql = "UPDATE Peliculas SET CantLikes = CantLikes + 1 WHERE IdPelicula=@pIdPelicula";
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            db.Execute(sql, new { pIdPelicula = IdPelicula });
         }
     }
 }

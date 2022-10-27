@@ -105,6 +105,13 @@ public class HomeController : Controller
         }
     }
 
+    [HttpPost]
+    public int DarLike(int IdPelicula){
+        BD.DarLike(IdPelicula);
+        return BD.ObtenerLikes(IdPelicula);
+    }
+
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
