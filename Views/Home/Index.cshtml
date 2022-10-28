@@ -2,12 +2,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row">
-    @foreach(Pelicula p in ViewBag.ListaPeliculas){
-        <div>
-            <img src="\@p.Portada"alt="@p.Nombre">
-            <a href='@Url.Action("Reproductor","Home",new{IdPelicula=@p.IdPelicula})'>@p.Nombre</a>
-            <p>Duracion: @p.Duracion.TotalMinutes minutos</p>
-        </div>
-    }
+<div class="containerIndex">
+
+    <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name = "IdGenero">
+        <option selected>Categorias</option>
+
+        @foreach (Genero item in ViewBag.ListaGeneros)
+        {
+            <option>@item.NombreGenero</option>
+        }
+        
+    </select>
+
+    <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5%">Destacadas</h4>
+
+   
+    <div class="destacados">
+
+        @foreach (Pelicula pelicula in ViewBag.ListaPeliculas)
+        {
+            <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
+                <div class="bottom">
+                    <button class="fa-regular fa-heart" onclick="darLike(@pelicula.IdPelicula)" id="CantidadLikes_@pelicula.IdPelicula">&nbsp;@pelicula.CantLikes</button>
+                    @* <i class="fa-regular fa-heart"></i> *@
+                    <i class="fa-regular fa-comment"></i>
+               </div>
+            </div>
+        }
+        
+    </div>
+
+
+    <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5% @ViewBag.NombreGenero"></h4>
+
+     <div class="peliculas-por-genero">
+
+        @foreach (Pelicula pelicula in ViewBag.ListaPeliculasPorGenero)
+        {
+            <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
+               
+            </div>
+        }
+        
+    </div>
 </div>

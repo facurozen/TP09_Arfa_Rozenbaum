@@ -7,9 +7,9 @@ namespace TP09_Arfa_Rozenbaum.Models;
 
 public class BD
 {
-    // private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
-    private static Usuario u =null;
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-052;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
+    // private static Usuario u =null;
+    private static string _connectionString = @"Server=LAPTOP-KQG37CT2\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -18,6 +18,17 @@ public class BD
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
             l = db.Query<Pelicula>(sql).ToList();
+        }
+        return l;
+    }
+
+    public static List<Genero> ObtenerGeneros()
+    {
+        string sql = "SELECT * FROM Generos";
+        List<Genero> l = new List<Genero>();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            l = db.Query<Genero>(sql).ToList();
         }
         return l;
     }
@@ -80,11 +91,11 @@ public class BD
 
     public static Pelicula AgregarPelicula(Pelicula p)
     {
-        string sql1= "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño)";
+        string sql1= "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño,@pIdGenero,0)";
         string sql2="SELECT TOP 1 * FROM Peliculas ORDER BY IdPelicula DESC";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql1, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año });
+            db.Execute(sql1, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año,pIdGenero=p.IdGenero });
             p = db.QueryFirstOrDefault<Pelicula>(sql2);
         }
         return p;
@@ -119,5 +130,23 @@ public class BD
             db.Execute(sql2, new {pIdPelicula = IdPelicula });
             db.Execute(sql3, new {pIdPelicula = IdPelicula });
         }
+    }
+    public static void DarLike(int IdPelicula)
+    {
+        string sql = "UPDATE Peliculas SET CantLikes = CantLikes + 1 WHERE IdPelicula=@pIdPelicula";
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            db.Execute(sql, new { pIdPelicula = IdPelicula });
+        }
+    }
+    public static int ObtenerLikes(int IdPelicula)
+    {
+        string sql = "SELECT CantLikes FROM Peliculas WHERE IdPelicula=@pIdPelicula";
+        Pelicula p = new Pelicula();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            p = db.QueryFirstOrDefault<Pelicula>(sql, new { pIdPelicula = IdPelicula });
+        }
+        return p.CantLikes;
     }
 }

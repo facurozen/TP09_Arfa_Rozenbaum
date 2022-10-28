@@ -1,4 +1,4 @@
-@* @{
+@{
 
     <div class="containerLogin">
 
@@ -29,14 +29,4 @@
 
         </form>
     </div>
-} *@
-
-@{
-    ViewData["Title"]="Iniciar sesion";
-}
-<form asp-controller="Home" asp-action="IniciarSesion" method="post">
-    <input type="text"name="Nombre"id="iNombre"placeholder="Nombre">
-    <input type="email"name="Email"id="iEmail"placeholder="Email">
-    <input type="password"name="Contraseña"id="iContraseña"placeholder="Contraseña">
-    <input type="submit"value="Iniciar sesion">
-</form>
+} 

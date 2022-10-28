@@ -35,12 +35,15 @@ public class AdministradorController : Controller
             Video v=BD.ObtenerVideo(IdPelicula);
             BD.EliminarPelicula(IdPelicula);
             System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+p.Portada);
-            System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+v.ArchivoVideo);
+            if(v!=null){
+                System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+v.ArchivoVideo);
+            }
             return RedirectToAction("AdministrarPeliculas");
         }
     }
 
     public IActionResult AgregarPelicula(){
+        ViewBag.ListaGeneros=BD.ObtenerGeneros();
         if(BD.ObtenerUsuario()==null){
             return RedirectToAction("Index","Home");
         }else{

@@ -18,10 +18,12 @@ public class HomeController : Controller
         Environment=environment;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int IdGenero=0)
     {
         ViewBag.Usuario = BD.ObtenerUsuario();
         ViewBag.ListaPeliculas=BD.ObtenerPeliculas();
+        ViewBag.ListaGeneros=BD.ObtenerGeneros();
+        ViewBag.ListaPeliculasPorGenero=BD.ObtenerPeliculasPorGenero(IdGenero);
         return View();
     }
 
@@ -54,6 +56,12 @@ public class HomeController : Controller
     public IActionResult AgregarComentario(Comentario c){
         BD.GuardarComentario(c);
         return RedirectToAction("Reproductor",new{IdPelicula=c.IdPelicula});
+    }
+    
+    [HttpPost]
+    public int DarLike(int IdPelicula){
+        BD.DarLike(IdPelicula);
+        return BD.ObtenerLikes(IdPelicula);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

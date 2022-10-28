@@ -4,21 +4,36 @@
 
 <form asp-controller="Administrador" asp-action="GuardarPelicula" method="post" enctype="multipart/form-data">
     <input type="text" name="Nombre" placeholder="Nombre">
-    <input type="file" name="arPortada" id="iPortada">
+    <input type="file" name="arPortada">
     <input type="file" name="arVideo" id="iVideo">
     <input type="text" name="Sinopsis" placeholder="Sinopsis">
+    <label for="iDuracion">Duracion</label>
     <input type="number" name="Año" placeholder="Año">
-    <input type="time" hidden="true"  id="iDuracion" name="Duracion" step="1">
+    <input type="time" hidden="true" id="iDuracion" name="Duracion" step="1">
+    <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name="IdGenero">
+        <option selected>Genero</option>
+
+        @foreach (Genero item in ViewBag.ListaGeneros)
+        {
+            <option value=@item.IdGenero>@item.NombreGenero</option>
+        }
+
+    </select>
+
+
+
+
     <input type="submit" value="Agregar">
 </form>
+
 <script>
-    var duracion=new Date(2000,0,0,0,0,0);
-    var video=document.createElement('video');
-    document.getElementById("iVideo").addEventListener("change", function() {
+    var duracion = new Date(2000, 0, 0, 0, 0, 0);
+    var video = document.createElement('video');
+    document.getElementById("iVideo").addEventListener("change", function () {
         var media = URL.createObjectURL(this.files[0]);
         video.src = media;
-        video.onloadedmetadata=function(){
-            duracion=duracion=new Date(2000,0,0,0,0,video.duration).toTimeString().split(' ')[0];
+        video.onloadedmetadata = function () {
+            duracion = duracion = new Date(2000, 0, 0, 0, 0, video.duration).toTimeString().split(' ')[0];
             $('#iDuracion').val(duracion);
         };
     });
