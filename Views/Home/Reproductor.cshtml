@@ -1,6 +1,11 @@
 @{
     ViewData["Title"] = @ViewBag.Pelicula.Nombre;
 }
+@if(ViewBag.Video.ArchivoVideo == null){
+    <div class="alert alert-danger" role="alert">
+  Error, esta pelicula aún no cuenta con el video.
+</div>
+}
 <video src='\@ViewBag.Video.ArchivoVideo'></video>
 <form asp-controller="Home" asp-action="AgregarComentario" id="CajaComentarios"method="POST">
     <textarea name="Texto" form="CajaComentarios"></textarea>

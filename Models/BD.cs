@@ -9,7 +9,7 @@ public class BD
 {
     private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
     // private static Usuario u =null;
-    private static string _connectionString = @"Server=LAPTOP-KQG37CT2\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-017;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -25,12 +25,12 @@ public class BD
     public static List<Genero> ObtenerGeneros()
     {
         string sql = "SELECT * FROM Generos";
-        List<Genero> l = new List<Genero>();
+        List<Genero> g = new List<Genero>();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            l = db.Query<Genero>(sql).ToList();
+            g = db.Query<Genero>(sql).ToList();
         }
-        return l;
+        return g;
     }
 
     public static List<Pelicula> ObtenerPeliculasPorGenero(int IdGenero)
