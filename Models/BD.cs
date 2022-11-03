@@ -9,7 +9,7 @@ public class BD
 {
     private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
     // private static Usuario u =null;
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-017;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-016;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -35,7 +35,7 @@ public class BD
 
     public static List<Pelicula> ObtenerPeliculasPorGenero(int IdGenero)
     {
-        string sql = "SELECT p.* FROM Peliculas AS p INNER JOIN GeneroPorPelicula AS gp ON p.IdPelicula=gp.IdPelicula WHERE gp.IdGenero=@pIdGenero";
+        string sql = "SELECT * FROM Peliculas WHERE IdGenero=@pIdGenero";
         List<Pelicula> l = new List<Pelicula>();
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
