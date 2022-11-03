@@ -6,20 +6,18 @@
     <form asp-controller="Administrador" asp-action="GuardarPelicula" method="post" enctype="multipart/form-data" id="formAgregarPelicula">
         <input type="text" name="Nombre" placeholder="Nombre" class="form-control" required>
         <label for="iPortada"class="form-label">Portada</label>
-        <input type="file" name="arPortada"class="form-control"id="iPortada" required>
+        <input type="file" name="arPortada"class="form-control-file"id="iPortada" required>
         <label for="iVideo"class="form-label">Video</label>
-        <input type="file" name="arVideo" id="iVideo"class="form-control" required>
+        <input type="file" name="arVideo" id="iVideo"class="form-control-file">
         <input type="text" name="Sinopsis" placeholder="Sinopsis"class="form-control" required>
         <input type="number" name="Año" placeholder="Año"class="form-control" required>
-        <input type="time" hidden="true" id="iDuracion" name="Duracion" step="1" required>
-        <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name="IdGenero">
-            <option selected>Genero</option>
-
+        <input type="time" hidden="true" id="iDuracion" name="Duracion" step="1">
+        <label for="iGenero" class="form-label">Genero</label>
+        <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name="IdGenero" id="iGenero">
             @foreach (Genero item in ViewBag.ListaGeneros)
             {
                 <option value=@item.IdGenero>@item.NombreGenero</option>
             }
-
         </select>
         <input type="submit" value="Agregar"class="btn btn-primary">
     </form>

@@ -15,63 +15,87 @@ public class AdministradorController : Controller
 
     public AdministradorController(IWebHostEnvironment environment)
     {
-        Environment=environment;
+        Environment = environment;
     }
 
-    public IActionResult AdministrarPeliculas(){
-        if(BD.ObtenerUsuario()==null){
-            return RedirectToAction("Index","Home");
-        }else{
-            ViewBag.ListaPeliculas=BD.ObtenerPeliculas();
+    public IActionResult AdministrarPeliculas()
+    {
+        if (BD.ObtenerUsuario() == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            ViewBag.ListaPeliculas = BD.ObtenerPeliculas();
             return View();
         }
     }
 
-    public IActionResult EliminarPelicula(int IdPelicula){
-        if(BD.ObtenerUsuario()==null){
-            return RedirectToAction("Index","Home");
-        }else{
-            Pelicula p=BD.ObtenerPelicula(IdPelicula);
-            Video v=BD.ObtenerVideo(IdPelicula);
+    public IActionResult EliminarPelicula(int IdPelicula)
+    {
+        if (BD.ObtenerUsuario() == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            Pelicula p = BD.ObtenerPelicula(IdPelicula);
+            Video v = BD.ObtenerVideo(IdPelicula);
             BD.EliminarPelicula(IdPelicula);
-            System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+p.Portada);
-            if(v!=null){
-                System.IO.File.Delete(this.Environment.ContentRootPath+@"\wwwroot\"+v.ArchivoVideo);
+            System.IO.File.Delete(this.Environment.ContentRootPath + @"\wwwroot\" + p.Portada);
+            if (v != null)
+            {
+                System.IO.File.Delete(this.Environment.ContentRootPath + @"\wwwroot\" + v.ArchivoVideo);
             }
             return RedirectToAction("AdministrarPeliculas");
         }
     }
 
-    public IActionResult AgregarPelicula(){
-        ViewBag.ListaGeneros=BD.ObtenerGeneros();
-        if(BD.ObtenerUsuario()==null){
-            return RedirectToAction("Index","Home");
-        }else{
+    public IActionResult AgregarPelicula()
+    {
+        ViewBag.ListaGeneros = BD.ObtenerGeneros();
+        if (BD.ObtenerUsuario() == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
             return View();
         }
     }
 
     [HttpPost]
-    public IActionResult GuardarPelicula(IFormFile arPortada,Pelicula p,IFormFile arVideo){
-        if(BD.ObtenerUsuario()==null){
-            return RedirectToAction("Index","Home");
-        }else{          
-            if(arPortada.Length>0){
-                string dirPortadas=this.Environment.ContentRootPath+@"\wwwroot\"+arPortada.FileName;
-                using(var stream=System.IO.File.Create(dirPortadas)){
+    public IActionResult GuardarPelicula(IFormFile arPortada, Pelicula p, IFormFile arVideo)
+    {
+        if (BD.ObtenerUsuario() == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            if (arPortada.Length > 0)
+            {
+                string dirPortadas = this.Environment.ContentRootPath + @"\wwwroot\" + arPortada.FileName;
+                using (var stream = System.IO.File.Create(dirPortadas))
+                {
                     arPortada.CopyTo(stream);
                 }
             }
-            if(arVideo.Length>0){
-                string dirVideos=this.Environment.ContentRootPath+@"\wwwroot\"+arVideo.FileName;
-                using(var stream=System.IO.File.Create(dirVideos)){
-                    arVideo.CopyTo(stream);
+            p.Portada = arPortada.FileName;
+            p = BD.AgregarPelicula(p);
+            if (arVideo != null)
+            {
+                Video v = new Video(0, arVideo.FileName, p.Duracion, p.IdPelicula);
+                BD.AgregarVideo(v);
+                if (arVideo.Length > 0)
+                {
+                    string dirVideos = this.Environment.ContentRootPath + @"\wwwroot\" + arVideo.FileName;
+                    using (var stream = System.IO.File.Create(dirVideos))
+                    {
+                        arVideo.CopyTo(stream);
+                    }
                 }
             }
-            p.Portada=arPortada.FileName;
-            p=BD.AgregarPelicula(p);
-            Video v=new Video(0,arVideo.FileName,p.Duracion,p.IdPelicula);
-            BD.AgregarVideo(v);
             return RedirectToAction("AdministrarPeliculas");
         }
     }
