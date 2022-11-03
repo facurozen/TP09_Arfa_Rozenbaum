@@ -21,7 +21,10 @@
 
         @foreach (Pelicula pelicula in ViewBag.ListaPeliculas)
         {
-            <div class="pelicula" style="background-image: url('/@pelicula.Portada');"><a href = '@Url.Action("Reproductor","Home",new{IdPelicula = pelicula.IdPelicula})'></a>
+            <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
+            <a href = '@Url.Action("Reproductor","Home",new{IdPelicula = pelicula.IdPelicula})'>
+                <i class="fa-solid fa-play"></i>
+            </a>
                 <div class="bottom">
                     <button class="fa-regular fa-heart" onclick="darLike(@pelicula.IdPelicula)" id="CantidadLikes_@pelicula.IdPelicula">&nbsp;@pelicula.CantLikes</button>
                     @* <i class="fa-regular fa-comment"></i> *@
