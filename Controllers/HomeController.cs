@@ -35,8 +35,8 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult IniciarSesion(string Nombre, string Email, string Contraseña)
     {
-        Usuario p = BD.IniciarSesion(Nombre, Email, Contraseña);
-        if (p == null)
+        Usuario u = BD.IniciarSesion(Nombre, Email, Contraseña);
+        if (u == null)
         {
             return RedirectToAction("Login");
         }
@@ -51,17 +51,17 @@ public class HomeController : Controller
         ViewBag.Video=BD.ObtenerVideo(IdPelicula);
         return View();
     }
-
-    [HttpPost]
-    public IActionResult AgregarComentario(Comentario c){
-        BD.GuardarComentario(c);
-        return RedirectToAction("Reproductor",new{IdPelicula=c.IdPelicula});
-    }
-    
+   
     [HttpPost]
     public int DarLike(int IdPelicula){
         BD.DarLike(IdPelicula);
         return BD.ObtenerLikes(IdPelicula);
+    }
+
+    [HttpPost]
+    public List<Comentario> escribirComentario(Comentario c, int IdPelicula ){
+        BD.escribirComentario(c);
+        return BD.ObtenerComentariosPorPelicula(IdPelicula);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

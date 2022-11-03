@@ -9,7 +9,7 @@ public class BD
 {
     private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
     // private static Usuario u =null;
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-016;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-041;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -66,7 +66,7 @@ public class BD
         return l;
     }
 
-    public static void GuardarComentario(Comentario c)
+    public static void escribirComentario(Comentario c)
     {
         string sql = "INSERT INTO Comentarios VALUES (@pIdPelicula,@pTexto)";
         using (SqlConnection db = new SqlConnection(_connectionString))
