@@ -91,11 +91,11 @@ public class BD
 
     public static Pelicula AgregarPelicula(Pelicula p)
     {
-        string sql1= "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño,@pIdGenero,0)";
+        string sql1= "INSERT INTO Peliculas VALUES (@pNombre,@pPortada,@pSinopsis,@pDuracion,@pAño,@pIdGenero,0,@pSrcTrailer)";
         string sql2="SELECT TOP 1 * FROM Peliculas ORDER BY IdPelicula DESC";
         using (SqlConnection db = new SqlConnection(_connectionString))
         {
-            db.Execute(sql1, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año,pIdGenero=p.IdGenero });
+            db.Execute(sql1, new { pNombre = p.Nombre, pPortada = p.Portada, pSinopsis = p.Sinopsis, pDuracion=p.Duracion, pAño = p.Año,pIdGenero=p.IdGenero, pSrcTrailer=p.SrcTrailer });
             p = db.QueryFirstOrDefault<Pelicula>(sql2);
         }
         return p;

@@ -1,13 +1,20 @@
 @{
     ViewData["Title"] = @ViewBag.Pelicula.Nombre;
 }
-@if (ViewBag.Video == null)
-{
-    <div class="alert alert-danger" role="alert">
-        Lo sentimos, no pudimos encontrar la pelicula.
-    </div>
-}
-else
-{
-    <video src='\@ViewBag.Video.ArchivoVideo'></video>
-}
+
+<div style="text-align: center; padding: 5% 0%;">
+    @if (ViewBag.Video == null)
+    {
+        <div class="alert alert-danger" role="alert">
+            Lo sentimos, no pudimos encontrar la pelicula.
+        </div>
+        <iframe width="560" height="315" src="@ViewBag.Pelicula.SrcTrailer" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
+        //X-Frame-Options
+    }
+    else
+    {
+        <h2>@ViewBag.Pelicula.Nombre</h2>
+        <video style="width: 90%" controls src='\@ViewBag.Video.ArchivoVideo'></video>
+    }
+</div>
