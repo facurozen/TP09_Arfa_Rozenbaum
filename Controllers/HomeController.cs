@@ -21,10 +21,29 @@ public class HomeController : Controller
     public IActionResult Index(int IdGenero=0)
     {
         ViewBag.Usuario = BD.ObtenerUsuario();
+            ViewBag.ListaGeneros=BD.ObtenerGeneros();
+        if(IdGenero==0){
         ViewBag.ListaPeliculas=BD.ObtenerPeliculas();
-        ViewBag.ListaGeneros=BD.ObtenerGeneros();
-        ViewBag.ListaPeliculasPorGenero=BD.ObtenerPeliculasPorGenero(IdGenero);
+
+        }else{
+        ViewBag.ListaPeliculas=BD.ObtenerPeliculasPorGenero(IdGenero);
+
+        }
         return View();
+    }
+    [HttpPost]
+    public IActionResult IndexPorGenero(int IdGenero=0)
+    {
+        ViewBag.Usuario = BD.ObtenerUsuario();
+            ViewBag.ListaGeneros=BD.ObtenerGeneros();
+        if(IdGenero==0){
+        ViewBag.ListaPeliculas=BD.ObtenerPeliculas();
+
+        }else{
+        ViewBag.ListaPeliculas=BD.ObtenerPeliculasPorGenero(IdGenero);
+
+        }
+        return View("Index");
     }
 
     public IActionResult Login()

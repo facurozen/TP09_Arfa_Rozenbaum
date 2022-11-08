@@ -149,16 +149,8 @@ body {
   line-height: 29px;
 }
 
-/*.logoIndex{
-  width: 5%;
-  margin-top: 1%;
-  position: absolute;
-  left: 2%;
-} */
 .containerIndex{
   width: 100%;
-  /* display: flex; */
-  /* justify-content: space-between */
 }
 .cuadradoPeli{
   width: 20%;
@@ -177,7 +169,7 @@ body {
   flex-wrap: wrap;
 }
 
-.containerIndex .destacados .pelicula{
+.pelicula{
   margin: 20px;
   width: 15%;
   height: 240px;
@@ -190,7 +182,7 @@ body {
   align-items: flex-end;
 }
 
-.containerIndex .destacados .pelicula i{
+.pelicula i{
   margin: 10px 0px;
   width: 20px;
   height: 20px;
@@ -209,4 +201,10 @@ body {
 
 #formAgregarPelicula > *{
   margin: 1%;
+}
+
+.botonReproductor{
+  position: absolute;
+  margin-top: -6%;
+  
 }
