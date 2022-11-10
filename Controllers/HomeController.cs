@@ -78,9 +78,13 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public List<Comentario> escribirComentario(Comentario c, int IdPelicula ){
-        BD.escribirComentario(c);
-        return BD.ObtenerComentariosPorPelicula(IdPelicula);
+    public void escribirComentario(Comentario c){
+        BD.escribirComentario(c);    
+    }
+    [HttpPost]
+    public List<Comentario> mostrarComentario(Comentario c, int IdPelicula){
+        return  BD.ObtenerComentariosPorPelicula(IdPelicula);
+        
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

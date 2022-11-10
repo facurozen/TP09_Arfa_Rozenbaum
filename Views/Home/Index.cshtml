@@ -29,8 +29,8 @@
         </a>
         <div class="bottom">
           <button class="fa-regular fa-heart" onclick="darLike(@pelicula.IdPelicula)" id="CantidadLikes_@pelicula.IdPelicula">&nbsp;@pelicula.CantLikes</button>
-          <button class="fa-regular fa-comment" onclick="escribirComentario(@pelicula.IdPelicula)" data-toggle="modal"
-          data-target="#ModalComentario"></button>
+          <button class="fa-regular fa-comment-plus" onclick="escribirComentario(@pelicula.IdPelicula)" data-toggle="modal" data-target="#ModalComentario"></button>
+          <button class="fa-solid fa-comment" onclick="mostrarComentario(@pelicula.IdPelicula)" data-toggle="modal" data-target="#ModalMostrarComentario"></button>
         </div>
       </div>
     }
@@ -49,10 +49,30 @@
         </div>
         <div class="modal-body">
           <form method="post" action='@Url.Action("escribirComentario","Home")'>
-            <input type="hidden" name="IdPelicula" id="iIdPelicula">
-            <input type="text" name="Texto" placeholder="IngreseComentario">
+            <input type="hidden" name="IdPelicula" id="IdPelicula">
+            <input type="text" name="Texto" placeholder="Ingrese un comentario" id= "texto">
             <button type="submit" class="btn btn-primary">Save changes</button>
           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="ModalMostrarComentario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <div id="Texto"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -19,17 +19,23 @@ function darLike(IdP) {
 }
 
 function escribirComentario(IdP){
-    $("#iIdPelicula").val(IdP);
+    $("#IdPelicula").val(IdP);
+}
+
+function mostrarComentario(IdP) {
     $.ajax(
         {
             type: 'POST',
             dataType: 'JSON',
-            url: '/Home/escribirComentario',
+            url: '/Home/mostrarComentario',
             data: { IdPelicula: IdP },
             success:
                 function (response) {
-                    
+                    response.forEach(element => {
+                        $("#Texto")+="<p>"+(element.texto)+"</p>";
+                    });
                 }
         }
     )
 }
+
