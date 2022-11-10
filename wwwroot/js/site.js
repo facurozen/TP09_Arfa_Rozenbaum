@@ -16,5 +16,20 @@ function darLike(IdP) {
                 }
         }
     )
+}
 
+function escribirComentario(IdP){
+    $("#iIdPelicula").val(IdP);
+    $.ajax(
+        {
+            type: 'POST',
+            dataType: 'JSON',
+            url: '/Home/escribirComentario',
+            data: { IdPelicula: IdP },
+            success:
+                function (response) {
+                    
+                }
+        }
+    )
 }

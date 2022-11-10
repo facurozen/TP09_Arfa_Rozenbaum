@@ -193,11 +193,12 @@ body {
   width: 60%;
   background-color: #D9D9D9;
   border-radius: 10px;
+  padding: 1.5%;
 }
-
+/* 
 #formAgregarPelicula{
   margin: 3%;
-}
+} */
 
 #formAgregarPelicula > *{
   margin: 1%;
