@@ -12,17 +12,28 @@ function darLike(IdP) {
             data: { IdPelicula: IdP },
             success:
                 function (response) {
-                    $("#CantidadLikes_"+IdP).html("&nbsp;"+response);
+                    $("#CantidadLikes_" + IdP).html("&nbsp;" + response);
                 }
         }
     )
 }
 
-function escribirComentario(IdP){
-    $("#IdPelicula").val(IdP);
+function escribirComentario(IdP) {
+    $.ajax({
+            type: 'POST',
+            dataType: 'JSON',
+            url: '/Home/escribirComentario',
+            data: $('#FormEnviarComentario').serialize(),
+            success:
+                function(){
+                    alert('Comentario enviado');
+                }
+        }
+    )
 }
 
 function mostrarComentario(IdP) {
+    $("#Texto").empty();
     $.ajax(
         {
             type: 'POST',
@@ -32,10 +43,14 @@ function mostrarComentario(IdP) {
             success:
                 function (response) {
                     response.forEach(element => {
-                        $("#Texto")+="<p>"+(element.texto)+"</p>";
+                        $("#Texto").append("<p>" + (element.texto) + "</p>");
                     });
                 }
         }
     )
+}
+
+function setearIdPelicula(IdP){
+    $("#iIdPelicula").val(IdP);
 }
 

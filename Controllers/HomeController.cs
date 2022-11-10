@@ -79,7 +79,7 @@ public class HomeController : Controller
 
     [HttpPost]
     public void escribirComentario(Comentario c){
-        BD.escribirComentario(c);    
+        BD.escribirComentario(c);
     }
     [HttpPost]
     public List<Comentario> mostrarComentario(Comentario c, int IdPelicula){
