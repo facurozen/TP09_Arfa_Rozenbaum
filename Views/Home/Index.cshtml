@@ -3,7 +3,6 @@
 }
 
 <div class="containerIndex">
-
  <form method="post" action='@Url.Action("IndexPorGenero","Home")'>
   <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name="IdGenero">
     <option selected>Categorias</option>
@@ -15,8 +14,9 @@
   <input type="submit" value ="Filtrar">
 </form>
 
-@* <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5% @ViewBag.NombreGenero"></h4> *@
-  <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5%">Destacadas</h4>
+
+<h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5% @ViewBag.NombreGenero"></h4> 
+  @* <h4 style="font-family: 'Poppins';  margin:10px 20px; color:white; padding-top:5%">Destacadas</h4> *@
 
   <div class="destacados">
     @foreach (Pelicula pelicula in ViewBag.ListaPeliculas)
@@ -24,7 +24,7 @@
       <div class="pelicula" style="background-image: url('/@pelicula.Portada');">
         <a href='@Url.Action("Reproductor","Home",new{IdPelicula = pelicula.IdPelicula})'>
           <div class = "botonReproductor">
-          <button class="bi bi-play-btn-fill"></button>
+          <button class="bi bi-play-circle"></button>
           </div>
         </a>
         <div class="bottom">

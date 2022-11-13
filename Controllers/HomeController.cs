@@ -41,7 +41,7 @@ public class HomeController : Controller
 
         }else{
         ViewBag.ListaPeliculas=BD.ObtenerPeliculasPorGenero(IdGenero);
-
+        //ViewBag.NombreGenero = BD.ObtenerNombreGenero(IdGenero);
         }
         return View("Index");
     }

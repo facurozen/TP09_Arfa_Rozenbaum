@@ -9,7 +9,7 @@ public class BD
 {
     private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
     // private static Usuario u =null;
-    private static string _connectionString = @"Server=A-PHZ2-CIDI-017;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=DESKTOP-5JS9G07\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {
@@ -42,6 +42,16 @@ public class BD
             l = db.Query<Pelicula>(sql, new { pIdGenero = IdGenero }).ToList();
         }
         return l;
+    }
+    public static Genero ObtenerNombreGenero(int IdGenero)
+    {
+        string sql = "SELECT NombreGenero FROM Generos WHERE IdGenero=@pIdGenero";
+        Genero g = new Genero();
+        using (SqlConnection db = new SqlConnection(_connectionString))
+        {
+            g = db.QueryFirstOrDefault<Genero>(sql, new { pIdGenero= IdGenero });
+        }
+        return g;
     }
 
     public static Pelicula ObtenerPelicula(int IdPelicula)

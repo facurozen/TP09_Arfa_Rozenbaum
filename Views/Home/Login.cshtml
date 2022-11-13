@@ -1,32 +1,13 @@
 @{
 
     <div class="containerLogin">
-
-        <img class="logo" src="/logo.png" alt="Responsive image">
-
-        <form method="post" action='@Url.Action("IniciarSesion","Home")'>
-            <div class="posForm1">
-                <svg style="margin-left: 5%;" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-fill"
-                    viewBox="0 0 16 16">
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                </svg>
-            </div>
+        <form class="login-form" method="post" action='@Url.Action("IniciarSesion","Home")'>      
             <input class="estiloNombreUsuario estiloRectangulo1" type="text" name="Nombre"
                 placeholder="    Nombre de Usuario" />
-
-            <div class="posForm2">
-
-            </div>
             <input class="estiloEmail estiloRectangulo2" type="email" name="Email" placeholder="   Correo electronico" />
-
-            <div class="posForm3">
-
-            </div>
             <input class="estiloContraseña estiloRectangulo3" type="password" name="Contraseña"
                 placeholder="   Ingrese la contraseña" />
-
             <input class="estiloSubmit estiloRectangulo4" type="submit" name="Guardar" placeholder="   REGISTRARSE" />
-
         </form>
     </div>
 } 
