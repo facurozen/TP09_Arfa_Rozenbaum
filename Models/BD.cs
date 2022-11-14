@@ -9,7 +9,7 @@ public class BD
 {
     private static Usuario u = new Usuario(1,"Administrador","admin@gmail.com","administrador");
     // private static Usuario u =null;
-    private static string _connectionString = @"Server=DESKTOP-5JS9G07\SQLEXPRESS;DataBase=Mr.Peliculas;Trusted_Connection=True;";
+    private static string _connectionString = @"Server=A-PHZ2-CIDI-019;DataBase=Mr.Peliculas;Trusted_Connection=True;";
 
     public static List<Pelicula> ObtenerPeliculas()
     {

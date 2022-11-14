@@ -167,7 +167,7 @@ body {
 }
 
 .botonReproductor{
-  position: absolute;
-  margin-top: -6%;
+  display: flex;
+  justify-content: center;
 }
 
