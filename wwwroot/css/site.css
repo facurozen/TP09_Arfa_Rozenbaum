@@ -129,6 +129,7 @@ body {
 }
 
 .pelicula{
+  position: relative;
   margin: 10px;
   width: 14%;
   height: 240px;
@@ -167,7 +168,8 @@ body {
 }
 
 .botonReproductor{
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 40%;
+  left: 36%;
 }
 
