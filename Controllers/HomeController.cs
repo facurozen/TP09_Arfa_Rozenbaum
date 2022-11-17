@@ -78,8 +78,9 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public void escribirComentario(Comentario c){
+    public bool escribirComentario(Comentario c){
         BD.escribirComentario(c);
+        return true;
     }
     [HttpPost]
     public List<Comentario> mostrarComentario(Comentario c, int IdPelicula){

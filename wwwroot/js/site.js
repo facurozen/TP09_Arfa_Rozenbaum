@@ -25,8 +25,12 @@ function escribirComentario(IdP) {
             url: '/Home/escribirComentario',
             data: $('#FormEnviarComentario').serialize(),
             success:
-                function(){
+                function(response){
                     alert('Comentario enviado');
+                },
+            error:
+                function(){
+                    alert('Hubo un problema, intenta otra vez');
                 }
         }
     )
