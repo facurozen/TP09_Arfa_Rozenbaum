@@ -26,11 +26,11 @@ function escribirComentario(IdP) {
             data: $('#FormEnviarComentario').serialize(),
             success:
                 function(response){
-                    alert('Comentario enviado');
+                    $("#Gracias").html("Comentario Enviado. Presione Close para volver ")
                 },
             error:
                 function(){
-                    alert('Hubo un problema, intenta otra vez');
+                    $("#Gracias").html("El comentario no puede superar los 200 caracteres ")
                 }
         }
     )

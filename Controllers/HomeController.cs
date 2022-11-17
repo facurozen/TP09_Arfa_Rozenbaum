@@ -18,6 +18,7 @@ public class HomeController : Controller
         Environment=environment;
     }
 
+    [HttpGet]
     public IActionResult Index(int IdGenero=0)
     {
         ViewBag.Usuario = BD.ObtenerUsuario();
@@ -31,7 +32,7 @@ public class HomeController : Controller
         }
         return View();
     }
-    [HttpPost]
+    
     public IActionResult IndexPorGenero(int IdGenero=0)
     {
         ViewBag.Usuario = BD.ObtenerUsuario();

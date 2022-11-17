@@ -3,7 +3,7 @@
 }
 
 <div class="containerIndex">
- <form method="post" action='@Url.Action("IndexPorGenero","Home")'>
+ <form method="get" action='@Url.Action("Index","Home")'>
   <select style="width: 15%; margin:20px;" class="form-select" aria-label="Default select example" name="IdGenero">
     <option selected>Categorias</option>
     @foreach (Genero item in ViewBag.ListaGeneros)
@@ -27,7 +27,7 @@
           </div>
         </a>
           <button class="fa-regular fa-heart" onclick="darLike(@pelicula.IdPelicula)" id="CantidadLikes_@pelicula.IdPelicula">&nbsp;@pelicula.CantLikes</button>
-          <button class="fa-regular fa-comment-plus" onclick="setearIdPelicula(@pelicula.IdPelicula)" data-toggle="modal" data-target="#ModalComentario"></button>
+          <button class="fa-solid fa-comment-medical" onclick="setearIdPelicula(@pelicula.IdPelicula)" data-toggle="modal" data-target="#ModalComentario"></button>
           <button class="fa-solid fa-comment" onclick="mostrarComentario(@pelicula.IdPelicula)" data-toggle="modal" data-target="#ModalMostrarComentario"></button>  
       </div>
     }
@@ -39,7 +39,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Insertar comentario</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Agregar un comentario</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -47,11 +47,13 @@
         <div class="modal-body">
           <form method="post" id="FormEnviarComentario">
             <input type="hidden" name="IdPelicula" id="iIdPelicula" value="1">
-            <input type="text" name="Texto" placeholder="Ingrese un comentario" id= "texto">
+            <input type="text" name="Texto" placeholder="Ingrese un comentario" id= "texto" maxlength="200">
           </form>
-            <button class="btn btn-primary"onclick="escribirComentario()">Save changes</button>
+          <br> 
+            <button class="btn btn-primary"onclick="escribirComentario()"> Save changes</button>
         </div>
         <div class="modal-footer">
+          <div id="Gracias"></div>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -63,7 +65,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <h5 class="modal-title" id="exampleModalLabel"> Comentarios</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
